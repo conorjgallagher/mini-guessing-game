@@ -1,8 +1,10 @@
 input.onButtonPressed(Button.A, function () {
     if (GameOver == 1) {
         GameOver = 0
+        Game = 1
         Score = 0
         AorB = randint(0, 1)
+        basic.showString("A or B")
     } else {
         if (AorB == 0) {
             pins.digitalWritePin(DigitalPin.P1, 1)
@@ -68,9 +70,7 @@ input.onButtonPressed(Button.AB, function () {
 })
 input.onButtonPressed(Button.B, function () {
     if (GameOver == 1) {
-        GameOver = 0
-        Score = 0
-        AorB = randint(0, 1)
+    	
     } else {
         if (AorB == 1) {
             pins.digitalWritePin(DigitalPin.P1, 1)
@@ -99,12 +99,14 @@ input.onButtonPressed(Button.B, function () {
         }
     }
 })
-let TopScore = 0
 let AorB = 0
+let Game = 0
+let TopScore = 0
 let Score = 0
 let GameOver = 0
 GameOver = 1
 Score = 0
+TopScore = 0
 basic.forever(function () {
     while (GameOver == 1) {
         pins.digitalWritePin(DigitalPin.P1, 1)
@@ -113,14 +115,14 @@ basic.forever(function () {
         basic.pause(1000)
         pins.digitalWritePin(DigitalPin.P1, 0)
         pins.digitalWritePin(DigitalPin.P0, 0)
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            `)
         if (GameOver == 1) {
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                `)
             basic.pause(100)
         }
         if (GameOver == 1) {
