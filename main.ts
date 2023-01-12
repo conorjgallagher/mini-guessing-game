@@ -6,97 +6,117 @@ input.onButtonPressed(Button.A, function () {
         AorB = randint(0, 1)
         basic.showString("A or B")
     } else {
-        if (AorB == 0) {
-            pins.digitalWritePin(DigitalPin.P1, 1)
-            basic.showIcon(IconNames.Yes)
-            basic.pause(500)
-            pins.digitalWritePin(DigitalPin.P1, 0)
-            Score += 1
-            basic.showLeds(`
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
-            AorB = randint(0, 1)
-        } else {
-            music.playTone(131, music.beat(BeatFraction.Whole))
-            pins.digitalWritePin(DigitalPin.P0, 1)
-            basic.showIcon(IconNames.Skull)
-            basic.pause(500)
-            pins.digitalWritePin(DigitalPin.P0, 0)
-            GameOver = 1
-            if (Score > TopScore) {
-                TopScore = Score
+        if (Game == 1) {
+            if (AorB == 0) {
+                pins.digitalWritePin(DigitalPin.P1, 1)
+                basic.showIcon(IconNames.Yes)
+                basic.pause(500)
+                pins.digitalWritePin(DigitalPin.P1, 0)
+                Score += 1
+                basic.showLeds(`
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    `)
+                AorB = randint(0, 1)
+            } else {
+                music.playTone(131, music.beat(BeatFraction.Whole))
+                pins.digitalWritePin(DigitalPin.P0, 1)
+                basic.showIcon(IconNames.Skull)
+                basic.pause(500)
+                pins.digitalWritePin(DigitalPin.P0, 0)
+                GameOver = 1
+                if (Score > TopScore) {
+                    TopScore = Score
+                }
             }
         }
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    if (GameOver == 0) {
-        if (AorB == 0) {
-            basic.showLeds(`
-                . . # . .
-                . # . # .
-                # . . . #
-                # # # # #
-                # . . . #
-                `)
-            basic.showLeds(`
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
-        } else {
-            basic.showLeds(`
-                # # # . .
-                # . . # .
-                # # # . .
-                # . . # .
-                # # # # .
-                `)
-            basic.showLeds(`
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
+    if (Game == 1) {
+        if (GameOver == 0) {
+            if (AorB == 0) {
+                basic.showLeds(`
+                    . . # . .
+                    . # . # .
+                    # . . . #
+                    # # # # #
+                    # . . . #
+                    `)
+                basic.showLeds(`
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    `)
+            } else {
+                basic.showLeds(`
+                    # # # . .
+                    # . . # .
+                    # # # . .
+                    # . . # .
+                    # # # # .
+                    `)
+                basic.showLeds(`
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    `)
+            }
         }
     }
 })
 input.onButtonPressed(Button.B, function () {
     if (GameOver == 1) {
-    	
+        GameOver = 0
+        Game = 2
+        basic.showLeds(`
+            . . . . .
+            # . # . #
+            . . . . .
+            # . # . #
+            . . . . .
+            `)
     } else {
-        if (AorB == 1) {
-            pins.digitalWritePin(DigitalPin.P1, 1)
-            basic.showIcon(IconNames.Yes)
-            basic.pause(500)
-            pins.digitalWritePin(DigitalPin.P1, 0)
-            Score += 1
-            basic.showLeds(`
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
-            AorB = randint(0, 1)
-        } else {
-            music.playTone(131, music.beat(BeatFraction.Whole))
-            pins.digitalWritePin(DigitalPin.P0, 1)
-            basic.showIcon(IconNames.Skull)
-            basic.pause(500)
-            pins.digitalWritePin(DigitalPin.P0, 0)
-            GameOver = 1
-            if (Score > TopScore) {
-                TopScore = Score
+        if (Game == 1) {
+            if (AorB == 1) {
+                pins.digitalWritePin(DigitalPin.P1, 1)
+                basic.showIcon(IconNames.Yes)
+                basic.pause(500)
+                pins.digitalWritePin(DigitalPin.P1, 0)
+                Score += 1
+                basic.showLeds(`
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    `)
+                AorB = randint(0, 1)
+            } else {
+                music.playTone(131, music.beat(BeatFraction.Whole))
+                pins.digitalWritePin(DigitalPin.P0, 1)
+                basic.showIcon(IconNames.Skull)
+                basic.pause(500)
+                pins.digitalWritePin(DigitalPin.P0, 0)
+                GameOver = 1
+                if (Score > TopScore) {
+                    TopScore = Score
+                }
             }
         }
+    }
+})
+input.onGesture(Gesture.Shake, function () {
+    if (Game == 2) {
+        Score = randint(1, 6)
+        basic.showNumber(Score)
     }
 })
 let AorB = 0
