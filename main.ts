@@ -5,34 +5,34 @@ input.onButtonPressed(Button.A, function () {
         Score = 0
         AorB = randint(0, 1)
         basic.showString("A or B")
-    } else {
-        if (Game == 1) {
-            if (AorB == 0) {
-                pins.digitalWritePin(DigitalPin.P1, 1)
-                basic.showIcon(IconNames.Yes)
-                basic.pause(500)
-                pins.digitalWritePin(DigitalPin.P1, 0)
-                Score += 1
-                basic.showLeds(`
-                    . . . . .
-                    . . . . .
-                    . . . . .
-                    . . . . .
-                    . . . . .
-                    `)
-                AorB = randint(0, 1)
-            } else {
-                music.playTone(131, music.beat(BeatFraction.Whole))
-                pins.digitalWritePin(DigitalPin.P0, 1)
-                basic.showIcon(IconNames.Skull)
-                basic.pause(500)
-                pins.digitalWritePin(DigitalPin.P0, 0)
-                GameOver = 1
-                if (Score > TopScore) {
-                    TopScore = Score
-                }
+    } else if (Game == 1) {
+        if (AorB == 0) {
+            pins.digitalWritePin(DigitalPin.P1, 1)
+            basic.showIcon(IconNames.Yes)
+            basic.pause(500)
+            pins.digitalWritePin(DigitalPin.P1, 0)
+            Score += 1
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                `)
+            AorB = randint(0, 1)
+        } else {
+            music.playTone(131, music.beat(BeatFraction.Whole))
+            pins.digitalWritePin(DigitalPin.P0, 1)
+            basic.showIcon(IconNames.Skull)
+            basic.pause(500)
+            pins.digitalWritePin(DigitalPin.P0, 0)
+            GameOver = 1
+            if (Score > TopScore) {
+                TopScore = Score
             }
         }
+    } else if (Game == 2) {
+        GameOver = 1
     }
 })
 input.onButtonPressed(Button.AB, function () {
@@ -83,34 +83,34 @@ input.onButtonPressed(Button.B, function () {
             # . # . #
             . . . . .
             `)
-    } else {
-        if (Game == 1) {
-            if (AorB == 1) {
-                pins.digitalWritePin(DigitalPin.P1, 1)
-                basic.showIcon(IconNames.Yes)
-                basic.pause(500)
-                pins.digitalWritePin(DigitalPin.P1, 0)
-                Score += 1
-                basic.showLeds(`
-                    . . . . .
-                    . . . . .
-                    . . . . .
-                    . . . . .
-                    . . . . .
-                    `)
-                AorB = randint(0, 1)
-            } else {
-                music.playTone(131, music.beat(BeatFraction.Whole))
-                pins.digitalWritePin(DigitalPin.P0, 1)
-                basic.showIcon(IconNames.Skull)
-                basic.pause(500)
-                pins.digitalWritePin(DigitalPin.P0, 0)
-                GameOver = 1
-                if (Score > TopScore) {
-                    TopScore = Score
-                }
+    } else if (Game == 1) {
+        if (AorB == 1) {
+            pins.digitalWritePin(DigitalPin.P1, 1)
+            basic.showIcon(IconNames.Yes)
+            basic.pause(500)
+            pins.digitalWritePin(DigitalPin.P1, 0)
+            Score += 1
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                `)
+            AorB = randint(0, 1)
+        } else {
+            music.playTone(131, music.beat(BeatFraction.Whole))
+            pins.digitalWritePin(DigitalPin.P0, 1)
+            basic.showIcon(IconNames.Skull)
+            basic.pause(500)
+            pins.digitalWritePin(DigitalPin.P0, 0)
+            GameOver = 1
+            if (Score > TopScore) {
+                TopScore = Score
             }
         }
+    } else if (Game == 2) {
+        GameOver = 1
     }
 })
 input.onGesture(Gesture.Shake, function () {
